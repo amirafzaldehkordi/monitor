@@ -79,14 +79,12 @@ check_service_statuses() {
     done
 
     if [ ${#not_running[@]} -gt 0 ]; then
-        echo -e "\n========== Not Running Services =========="
         for service in "${not_running[@]}"; do
             echo "$service"
         done
     fi
 
     if [ ${#running[@]} -gt 0 ]; then
-        echo -e "\n========== Running Services =========="
         for service in "${running[@]}"; do
             echo "$service"
         done
