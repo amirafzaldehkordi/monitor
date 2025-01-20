@@ -105,10 +105,10 @@ check_swap_usage() {
     echo
 }
 
+list_high_usage_processes
 check_disk_usage
 check70_disk_usage
 #check_network_speed
-list_high_usage_processes
 check_service_statuses
 check_server_load
 check_cpu_and_memory_usage
