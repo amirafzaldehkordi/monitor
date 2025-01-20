@@ -105,7 +105,6 @@ check_swap_usage() {
     echo
 }
 
-# Run all checks
 check_disk_usage
 check70_disk_usage
 #check_network_speed
