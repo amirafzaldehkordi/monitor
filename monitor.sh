@@ -51,8 +51,9 @@ check70_disk_usage() {
 # Function to list high-usage processes
 list_high_usage_processes() {
     echo "========== High-Usage Processes =========="
-    echo "Processes using >20% CPU or >20% Memory:"
-    ps aux --sort=-%cpu,-%mem | awk '$3 > 20 || $4 > 20 {printf "%-10s %-8s %-8s %-8s %-s\n", $1, $2, $3, $4, $11}'
+    echo "Processes using >50% CPU or >50% Memory:"
+    # Adjust the thresholds for CPU and Memory to 50%
+    ps aux --sort=-%cpu,-%mem | awk '$3 > 50 || $4 > 50 {printf "%-10s %-8s %-8s %-8s %-s\n", $1, $2, $3, $4, $11}'
     echo
 }
 
