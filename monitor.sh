@@ -76,7 +76,7 @@ check_service_statuses() {
 
 # Function to check server load and compare to CPU cores
 check_server_load() {
-    echo "========== Server Load =========="
+    echo "==========      Server Load     =========="
     load=$(uptime | awk -F 'load average:' '{print $2}' | cut -d, -f1 | xargs)
     cores=$(nproc)
     echo "Load Averages (1, 5, 15 min): $(uptime | awk -F 'load average:' '{print $2}')"
