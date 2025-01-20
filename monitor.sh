@@ -124,6 +124,7 @@ check_swap_usage() {
 }
 
 echo ---------------------------------------------------------------------- 
+echo
 list_high_usage_processes
 check_disk_usage
 check70_disk_usage
