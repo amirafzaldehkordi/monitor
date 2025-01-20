@@ -60,20 +60,39 @@ list_high_usage_processes() {
 # Function to check service statuses
 check_service_statuses() {
     echo "========== Service Statuses =========="
+    
     services=("nginx" "apache2" "mysql" "postgresql" "sshd" "ssh" \
-"powerdns" "pureftpd" "pop" "mariadb" "lfd" "imap" "httpd" \
-"exim" "cpsrvd" "cpanel" "directadmin" "lsws")
+    "powerdns" "pureftpd" "pop" "mariadb" "lfd" "imap" "httpd" \
+    "exim" "cpsrvd" "cpanel" "directadmin" "lsws")
+
+    not_running=()
+    running=()
+
     for service in "${services[@]}"; do
-        # Check if the service is installed
         if systemctl list-units --type=service | grep -q -E "($service|$service\.service)"; then
-            systemctl is-active --quiet "$service" && \
-            echo "$service: Running" || \
-            echo "$service: Not Running"
+            if systemctl is-active --quiet "$service"; then
+                running+=("$service: Running")
+            else
+                not_running+=("$service: Not Running")
+            fi
         fi
     done
+
+    if [ ${#not_running[@]} -gt 0 ]; then
+        echo -e "\n========== Not Running Services =========="
+        for service in "${not_running[@]}"; do
+            echo "$service"
+        done
+    fi
+
+    if [ ${#running[@]} -gt 0 ]; then
+        echo -e "\n========== Running Services =========="
+        for service in "${running[@]}"; do
+            echo "$service"
+        done
+    fi
     echo
 }
-
 # Function to check server load and compare to CPU cores
 check_server_load() {
     echo "==========      Server Load     =========="
