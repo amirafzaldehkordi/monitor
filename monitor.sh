@@ -2,7 +2,7 @@
 
 # Function to check CPU and Memory usage
 check_cpu_and_memory_usage() {
-    echo "---- CPU and Memory Usage ----"
+    echo "========== CPU and Memory Usage =========="
     # Extract CPU and Memory usage information from top
     top -b -n1 | awk '
     /%Cpu/ {printf "CPU Usage: %.2f%%\n", $2 + $4}
@@ -15,7 +15,7 @@ check_cpu_and_memory_usage() {
 
 # Function to check Disk usage
 check_disk_usage() {
-    echo "---- Disk Usage ----"
+    echo "========== Disk Usage =========="
     df -h | awk 'NR==1 || $NF == "/" {printf "%-20s %-10s %-10s %-10s %-10s\n", $1, $2, $3, $4, $5}'
     echo
 }
@@ -50,7 +50,7 @@ check70_disk_usage() {
 
 # Function to list high-usage processes
 list_high_usage_processes() {
-    echo "---- High-Usage Processes ----"
+    echo "========== High-Usage Processes =========="
     echo "Processes using >20% CPU or >20% Memory:"
     ps aux --sort=-%cpu,-%mem | awk '$3 > 20 || $4 > 20 {printf "%-10s %-8s %-8s %-8s %-s\n", $1, $2, $3, $4, $11}'
     echo
@@ -58,7 +58,7 @@ list_high_usage_processes() {
 
 # Function to check service statuses
 check_service_statuses() {
-    echo "---- Service Statuses ----"
+    echo "========== Service Statuses =========="
     services=("nginx" "apache2" "mysql" "postgresql" "sshd" "ssh" \
 "powerdns" "pureftpd" "pop" "mariadb" "lfd" "imap" "httpd" \
 "exim" "cpsrvd" "cpanel" "directadmin" "lsws")
@@ -75,7 +75,7 @@ check_service_statuses() {
 
 # Function to check server load and compare to CPU cores
 check_server_load() {
-    echo "---- Server Load ----"
+    echo "========== Server Load =========="
     load=$(uptime | awk -F 'load average:' '{print $2}' | cut -d, -f1 | xargs)
     cores=$(nproc)
     echo "Load Averages (1, 5, 15 min): $(uptime | awk -F 'load average:' '{print $2}')"
