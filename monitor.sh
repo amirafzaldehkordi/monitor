@@ -111,8 +111,8 @@ list_high_usage_processes
 check_disk_usage
 check70_disk_usage
 #check_network_speed
-check_service_statuses
 check_server_load
 check_cpu_and_memory_usage
 check_swap_usage
+check_service_statuses
 echo ---------------------------------------------------------------------- 
